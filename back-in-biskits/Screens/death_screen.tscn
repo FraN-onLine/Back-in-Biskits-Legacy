@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbycmc1usq8g"]
+
+[ext_resource type="Script" uid="uid://bh1ovk1x2hfmd" path="res://Screens/death_screen.gd" id="1_jcaqs"]
+[ext_resource type="Texture2D" uid="uid://c2ud5fy1gasn" path="res://Assets/Bosses/Cat Boss/Cat_Win.png" id="2_e3k05"]
+[ext_resource type="AudioStream" uid="uid://c5w5stxodaqjg" path="res://Assets/Sounds/death.wav" id="3_4v2tk"]
+
+[node name="death_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -9.0
+offset_right = -21.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jcaqs")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 1186.0
+offset_bottom = 665.0
+mouse_filter = 2
+color = Color(0.680275, 0.53353, 0.452245, 1)
+metadata/_edit_lock_ = true
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 407.0
+offset_right = 468.0
+offset_bottom = 495.0
+text = "Main Menu"
+
+[node name="Retry" type="Button" parent="."]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 407.0
+offset_right = 960.0
+offset_bottom = 493.0
+text = "Retry
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 1128.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 23
+text = "Placeholder, Placeholder!!!!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(574, 196)
+scale = Vector2(3.55929, 3.63741)
+texture = ExtResource("2_e3k05")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4v2tk")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]

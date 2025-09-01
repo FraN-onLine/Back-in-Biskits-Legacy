@@ -1,0 +1,196 @@
+[gd_scene load_steps=11 format=3 uid="uid://ckkrott6tmvs3"]
+
+[ext_resource type="Script" uid="uid://8esoo8esqsnn" path="res://UI/ui.gd" id="1_6dd3c"]
+[ext_resource type="Texture2D" uid="uid://b878bsp32bc4q" path="res://Assets/UI Elements/Heart.png" id="2_dhe1o"]
+[ext_resource type="Texture2D" uid="uid://d11mswhg6i6xj" path="res://Assets/UI Elements/Potency-Indicator.png" id="3_e707p"]
+[ext_resource type="FontFile" uid="uid://c087o32n144xo" path="res://Assets/Fonts/Silkscreen-Bold.ttf" id="3_q0uhn"]
+[ext_resource type="Texture2D" uid="uid://d3f0qto4dfo73" path="res://Assets/UI Elements/Shield.png" id="4_jqf55"]
+[ext_resource type="PackedScene" uid="uid://c2hxhom57jt5v" path="res://UI/Healthbar/healthbar.tscn" id="5_f1fl4"]
+[ext_resource type="PackedScene" uid="uid://cogpojwh20ud7" path="res://UI/StopwatchLabel.tscn" id="7_byuxr"]
+
+[sub_resource type="Animation" id="Animation_q0uhn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 574)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PotencyRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 508)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShieldRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(207, 510)]
+}
+
+[sub_resource type="Animation" id="Animation_dhe1o"]
+resource_name = "new_animationmove"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(15, 574), Vector2(15, 563)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PotencyRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 508), Vector2(16, 493)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShieldRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(207, 510), Vector2(207, 491)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e707p"]
+_data = {
+&"RESET": SubResource("Animation_q0uhn"),
+&"new_animationmove": SubResource("Animation_dhe1o")
+}
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_6dd3c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -74.0
+offset_right = 175.0
+offset_bottom = -42.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+texture = ExtResource("2_dhe1o")
+stretch_mode = 1
+
+[node name="PotencyRect" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -140.0
+offset_right = 48.0
+offset_bottom = -108.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+texture = ExtResource("3_e707p")
+stretch_mode = 1
+
+[node name="ShieldRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 207.0
+offset_top = -138.0
+offset_right = 239.0
+offset_bottom = -106.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+texture = ExtResource("4_jqf55")
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e707p")
+}
+autoplay = "new_animationmove"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 470.0
+offset_right = 137.0
+offset_bottom = 493.0
+theme_override_fonts/font = ExtResource("3_q0uhn")
+text = "Potency: "
+
+[node name="BossLabel" type="Label" parent="."]
+visible = false
+offset_left = 397.0
+offset_top = 50.0
+offset_right = 783.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("3_q0uhn")
+text = "CALICO-COOKIE CAT "
+horizontal_alignment = 1
+
+[node name="HPLabel" type="Label" parent="."]
+visible = false
+offset_left = 431.0
+offset_top = 65.0
+offset_right = 772.0
+offset_bottom = 90.0
+scale = Vector2(0.818658, 1.01965)
+theme_override_fonts/font = ExtResource("3_q0uhn")
+text = "HP: 100/500"
+horizontal_alignment = 1
+
+[node name="Healthbar" parent="." instance=ExtResource("5_f1fl4")]
+visible = false
+offset_left = 425.0
+offset_top = 16.0
+offset_right = 668.0
+offset_bottom = 72.0
+scale = Vector2(1.44955, 0.614513)
+
+[node name="Sprite2D" parent="Healthbar" index="1"]
+position = Vector2(-24.1454, 30.9188)
+scale = Vector2(2.90045, 7.01172)
+
+[node name="Sprite2D2" parent="Healthbar" index="2"]
+position = Vector2(251.4, 28)
+scale = Vector2(8.60004, 7)
+
+[node name="StopwatchLabel" parent="." instance=ExtResource("7_byuxr")]
+offset_left = -59.0
+offset_top = 607.0
+offset_right = 61.0
+offset_bottom = 647.0
+
+[editable path="Healthbar"]
